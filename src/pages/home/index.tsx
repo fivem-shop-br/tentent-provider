@@ -1,37 +1,14 @@
-import Image from "next/image";
-import { Button } from "@fivem-shop/react";
-import { Main } from "./styles.css";
+import { NextSeo } from "next-seo";
+import { ShopsProps } from "../index.page";
 
-import Apresentation from "@src/source/apresentation.png";
-import {
-  animate,
-  animateProvider,
-  animateChildren,
-} from "@src/styles/animate.css";
+interface homeProps {
+  shop: ShopsProps;
+}
 
-export default function Home() {
+export default function Home({ shop }: homeProps) {
   return (
-    <Main {...animateProvider}>
-      <animate.section>
-        <animate.h1 {...animateChildren}>Faça sua Loja</animate.h1>
-        <animate.span {...animateChildren}>para Fivem</animate.span>
-        <animate.p {...animateChildren}>
-          Crie sua loja em minutos e começe faturar. Escolha <br /> seu plano e
-          vamos lá!
-        </animate.p>
-        <animate.div {...animateChildren}>
-          <Button mode="primary" size="medium">
-            PLANOS
-          </Button>
-          <Button mode="secondary" size="medium">
-            REGISTRAR CONTA
-          </Button>
-        </animate.div>
-      </animate.section>
-
-      <animate.ul {...animateChildren}>
-        <Image src={Apresentation} alt="Apresentação" quality={100} />
-      </animate.ul>
-    </Main>
+    <>
+      <NextSeo title={shop.name} description={shop.description} />
+    </>
   );
 }
