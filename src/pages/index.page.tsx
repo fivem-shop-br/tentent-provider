@@ -1,5 +1,4 @@
-import { api } from "@src/services/api-client";
-import { GetServerSidePropsContext } from "next";
+import { getShop } from "@src/utils/get-shop";
 export { default } from "./home";
 
 export interface ShopsProps {
@@ -19,14 +18,4 @@ export interface ShopsProps {
   updatedAt: Date;
 }
 
-export async function getServerSideProps({ req }: GetServerSidePropsContext) {
-  const slug = req.headers.host!.split(".")[0];
-  try {
-    const { data: shop } = await api.get<ShopsProps>("shop/" + slug);
-    return {
-      props: { shop },
-    };
-  } catch (err) {
-    return { notFound: true };
-  }
-}
+export const getServerSideProps = getShop();

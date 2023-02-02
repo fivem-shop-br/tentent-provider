@@ -18,3 +18,26 @@ export const globalStyles = globalCss({
     border: 0,
   },
 });
+
+export const responsived = {
+  margin: "0 auto",
+  "@sm": {
+    maxWidth: "540px !important",
+  },
+
+  "@md": {
+    maxWidth: "720px !important",
+  },
+
+  "@lg": {
+    maxWidth: "960px !important",
+  },
+
+  "@xl": {
+    maxWidth: "1140px !important",
+  },
+
+  "@2xl": {
+    maxWidth: "1320px !important",
+  },
+};
