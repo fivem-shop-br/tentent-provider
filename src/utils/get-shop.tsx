@@ -11,6 +11,7 @@ export const getShop = () =>
         props: { shop },
       };
     } catch (err) {
+      console.log(err);
       return { notFound: true };
     }
   };
