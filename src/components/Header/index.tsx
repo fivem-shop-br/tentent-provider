@@ -7,7 +7,7 @@ import { NavBar } from "./components/NavBar";
 import { useScroll } from "@src/hooks/useScroll";
 import { useOutsideClick } from "@src/hooks/useOutsideClick";
 import { ShopsProps } from "@src/pages/index.page";
-import DefaultLogo from "@src/source/your-logo.svg";
+import DefaultLogo from "@src/source/default-logo.svg";
 
 const mobileNavIconStyled: React.CSSProperties = {
   position: "absolute",
@@ -16,7 +16,7 @@ const mobileNavIconStyled: React.CSSProperties = {
   flex: 1,
 };
 
-export function Header({ logo }: ShopsProps) {
+export function Header({ logo, slug }: ShopsProps) {
   const NavRef = useRef(null);
   const { isScrolled } = useScroll();
   const [mobileNav, setMobileNav] = useState(false);
@@ -38,10 +38,10 @@ export function Header({ logo }: ShopsProps) {
           {logo ? (
             <Image src={logo} alt="Logo" width={62} height={62} />
           ) : (
-            <Image src={DefaultLogo} alt="Default Logo" />
+            <Image src={DefaultLogo} alt="Logo Padrão" />
           )}
         </Link>
-        <NavBar />
+        <NavBar slug={slug} />
         <MobileNavIcon
           size={24}
           style={mobileNavIconStyled}
