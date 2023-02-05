@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { User } from "phosphor-react";
+import { ShoppingCart, User } from "phosphor-react";
 import { Button } from "@fivem-shop/react";
-
+import { useQuery } from "react-query";
+import { api } from "@src/services/api-client";
 const navLinks = [
   {
     href: "/#features",
@@ -17,28 +18,40 @@ const navLinks = [
   },
 ];
 
-export function NavBar() {
+interface NavBarProps {
+  slug: string;
+}
+
+export interface CategoryProps {
+  id: string;
+  shopSlug?: string;
+  name: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export function NavBar({ slug }: NavBarProps) {
+  const { data: categories } = useQuery<CategoryProps[]>(
+    "categories",
+    async () => {
+      const { data } = await api.get("categories/" + slug);
+      return data;
+    }
+  );
+
   return (
     <nav>
-      {navLinks.map((index, key) => (
-        <a href={index.href} key={key}>
-          {index.name}
-        </a>
-      ))}
+      {categories &&
+        categories.map((index, key) => (
+          <Link href={index.id} key={key}>
+            {index.name}
+          </Link>
+        ))}
       <div>
         <Button mode="primary" asChild>
-          <a href="#plans">PLANOS</a>
-        </Button>
-
-        <Button
-          mode="secondary"
-          hoverColor="$gray-500"
-          backgroundColor="$gray-600"
-          asChild
-        >
           <Link href="/auth/login">
-            <User weight="bold" />
-            LOGIN
+            <ShoppingCart weight="bold" />
+            CARRINHO
           </Link>
         </Button>
       </div>
