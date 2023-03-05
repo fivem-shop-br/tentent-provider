@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 import { Layout } from "../../components/Layout";
 import { ShopsProps } from "../index.page";
-import { Banner, Main, SlideForYouProducts } from "./styles.css";
+import { Banner, Main } from "./styles.css";
 import DefaultBanner from "@src/source/default-banner.svg";
 import { SliderContainer } from "./components/Slide";
 

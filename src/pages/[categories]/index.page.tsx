@@ -9,13 +9,14 @@ import { Main } from "../home/styles.css";
 import { Products } from "./styles,css";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
+
 interface Categories {
   shop: string;
 }
 
 export default function Categories({ shop }: homeProps) {
   const { query } = useRouter();
-  const { data: products, refetch } = useQuery<ProductProps[]>(
+  const { data: products, refetch, isLoading } = useQuery<ProductProps[]>(
     `products ${query}`,
     async () => {
       const { data } = await api.get("products/" + query.categories);
@@ -33,7 +34,7 @@ export default function Categories({ shop }: homeProps) {
       <Layout {...shop}>
         <Main>
           <Products>
-            {products &&
+            {!isLoading && products &&
               products.map((product, key) => (
                 <Product {...product} key={key} />
               ))}
